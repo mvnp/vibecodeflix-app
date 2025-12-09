@@ -4,6 +4,7 @@ import { Play } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import { Dimensions, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Footer from "../../src/components/Footer";
 import Header from "../../src/components/Header";
 import { useAuth } from "../../src/context/AuthContext";
 import { courseService } from "../../src/services/course";
@@ -71,36 +72,39 @@ export default function HomeScreen() {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-zinc-950">
+    <SafeAreaView className="flex-1 bg-zinc-950" edges={['top']}>
       <View className="px-4">
         <Header />
       </View>
       <ScrollView
-        contentContainerStyle={{ padding: 16 }}
+        contentContainerStyle={{ flexGrow: 1 }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#DC2626" />
         }
       >
-        <Text className="text-xl font-bold text-white mb-4">Meus Cursos</Text>
+        <View className="p-4">
+          <Text className="text-xl font-bold text-white mb-4">Meus Cursos</Text>
 
-        {loading ? (
-          <View className="flex-row flex-wrap justify-between">
-            {[1, 2, 3, 4].map(i => (
-              <View key={i} style={{ width: CARD_WIDTH }} className="mb-6">
-                <View className="w-full aspect-video bg-zinc-900 rounded-lg animate-pulse mb-2" />
-                <View className="w-3/4 h-4 bg-zinc-900 rounded animate-pulse" />
-              </View>
-            ))}
-          </View>
-        ) : courses.length === 0 ? (
-          <View className="items-center py-10">
-            <Text className="text-zinc-500">Nenhum curso encontrado.</Text>
-          </View>
-        ) : (
-          <View className="flex-row flex-wrap justify-between">
-            {courses.map(renderCourseCard)}
-          </View>
-        )}
+          {loading ? (
+            <View className="flex-row flex-wrap justify-between">
+              {[1, 2, 3, 4].map(i => (
+                <View key={i} style={{ width: CARD_WIDTH }} className="mb-6">
+                  <View className="w-full aspect-video bg-zinc-900 rounded-lg animate-pulse mb-2" />
+                  <View className="w-3/4 h-4 bg-zinc-900 rounded animate-pulse" />
+                </View>
+              ))}
+            </View>
+          ) : courses.length === 0 ? (
+            <View className="items-center py-10">
+              <Text className="text-zinc-500">Nenhum curso encontrado.</Text>
+            </View>
+          ) : (
+            <View className="flex-row flex-wrap justify-between">
+              {courses.map(renderCourseCard)}
+            </View>
+          )}
+        </View>
+        <Footer />
       </ScrollView>
     </SafeAreaView>
   );

@@ -4,6 +4,7 @@ import { ChevronRight } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Footer from "../../src/components/Footer";
 import Header from "../../src/components/Header";
 import { courseService } from "../../src/services/course";
 import { Course, Module } from "../../src/types";
@@ -51,7 +52,7 @@ export default function CourseDetailsScreen() {
     }
 
     return (
-        <SafeAreaView className="flex-1 bg-zinc-950" edges={['bottom']}>
+        <SafeAreaView className="flex-1 bg-zinc-950" edges={['top']}>
             <Stack.Screen options={{
                 headerShown: false, // Hide default header to use custom one
             }} />
@@ -104,6 +105,7 @@ export default function CourseDetailsScreen() {
                         ))
                     )}
                 </View>
+                <Footer />
             </ScrollView>
         </SafeAreaView>
     );

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
+import Footer from "../../src/components/Footer";
 import Header from "../../src/components/Header";
 import { courseService } from "../../src/services/course";
 import { Lesson, Section } from "../../src/types";
@@ -161,7 +162,7 @@ export default function ModuleScreen() {
     }
 
     return (
-        <SafeAreaView className="flex-1 bg-zinc-950" edges={['bottom']}>
+        <SafeAreaView className="flex-1 bg-zinc-950" edges={['top']}>
             <Stack.Screen options={{
                 headerShown: false
             }} />
@@ -186,13 +187,15 @@ export default function ModuleScreen() {
                 </View>
             </View>
 
-            <ScrollView className="flex-1 p-4">
-                {loading ? (
-                    <ActivityIndicator color="#DC2626" className="mt-10" />
-                ) : (
-                    renderLessonsList()
-                )}
-                <View className="h-10" />{/* Safe bottom spacer */}
+            <ScrollView className="flex-1">
+                <View className="p-4">
+                    {loading ? (
+                        <ActivityIndicator color="#DC2626" className="mt-10" />
+                    ) : (
+                        renderLessonsList()
+                    )}
+                </View>
+                <Footer />
             </ScrollView>
         </SafeAreaView>
     );
